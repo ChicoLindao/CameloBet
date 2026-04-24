@@ -7,12 +7,13 @@ export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   return {
     plugins: [react(), tailwindcss()],
-    base: './', // Força caminhos relativos em todos os assets
+    base: './', // Força caminhos relativos para funcionar em qualquer subpasta do GitHub
     build: {
       outDir: 'dist',
       assetsDir: 'assets',
+      emptyOutDir: true,
+      sourcemap: false,
       minify: 'esbuild',
-      reportCompressedSize: false,
     },
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
