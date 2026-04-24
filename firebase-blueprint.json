@@ -1,0 +1,64 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile and balance data",
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "balance": { "type": "number", "description": "Current balance in BRL" },
+        "photoURL": { "type": "string" }
+      },
+      "required": ["email", "balance"]
+    },
+    "Match": {
+      "title": "Match",
+      "description": "A sports match that can be bet on",
+      "type": "object",
+      "properties": {
+        "teamA": { "type": "string" },
+        "teamB": { "type": "string" },
+        "league": { "type": "string" },
+        "startTime": { "type": "string", "format": "date-time" },
+        "odds": { 
+          "type": "array",
+          "items": { "type": "number" }
+        },
+        "status": { "type": "string", "enum": ["scheduled", "live", "finished"] },
+        "sport": { "type": "string" }
+      },
+      "required": ["teamA", "teamB", "odds", "status"]
+    },
+    "Bet": {
+      "title": "Bet",
+      "description": "A bet placed by a user",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "matchId": { "type": "string" },
+        "selection": { "type": "string", "description": "1, X, or 2" },
+        "odds": { "type": "number" },
+        "amount": { "type": "number" },
+        "potentialReturn": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "won", "lost"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "matchId", "selection", "odds", "amount", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/matches/{matchId}": {
+      "schema": "Match",
+      "description": "Available matches"
+    },
+    "/bets/{betId}": {
+      "schema": "Bet",
+      "description": "User bets"
+    }
+  }
+}
