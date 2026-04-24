@@ -41,7 +41,10 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/20 rounded-full mb-6 text-primary">
+          <div 
+            onClick={() => document.getElementById('jogos-section')?.scrollIntoView({ behavior: 'smooth' })}
+            className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/20 rounded-full mb-6 text-primary cursor-pointer hover:bg-primary/20 transition-colors"
+          >
             <Zap size={14} fill="currentColor" />
             <span className="text-[10px] font-bold tracking-widest uppercase">ODDS TURBINADAS HOJE</span>
           </div>
@@ -172,7 +175,7 @@ export default function Hero() {
           <motion.div 
             animate={{ x: [0, 15, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -bottom-6 -left-6 bg-surface-900 border border-surface-700 p-5 rounded-3xl shadow-2xl z-20 flex items-center gap-4 border-l-4 border-l-success backdrop-blur-md"
+            className="absolute bottom-4 left-4 bg-surface-900 border border-surface-700 p-5 rounded-3xl shadow-2xl z-20 flex items-center gap-4 border-l-4 border-l-success backdrop-blur-md"
           >
             <div className="w-10 h-10 rounded-full bg-success/20 flex items-center justify-center">
               <Zap className="text-success" size={20} fill="currentColor" />
